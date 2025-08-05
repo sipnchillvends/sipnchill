@@ -2,104 +2,344 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sip N Chill</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Sip N Chill offers a premium vending experience with chilled drinks and desserts at gyms, offices, and events. Grab. Sip. Chill — anytime.">
+  <meta name="keywords" content="Sip N Chill, vending machines, luxury vending, gym vending, drinks, ice cream">
+  <meta name="author" content="Sip N Chill">
+  <title>Sip N Chill | Premium Vending Machines</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.8;
+      --bg: #000;
+      --text: #fff;
+      --primary: #00FFFF;
+      --accent: #FF3CAC;
+      transition: background 0.5s, color 0.5s;
+    }
+
+    body.dark {
+      --bg: #000;
+      --text: #fff;
+    }
+
+    body.light {
+      --bg: #fff;
+      --text: #000;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+
+    header {
+      text-align: center;
+      padding: 50px 20px;
+    }
+
+    header img {
+      height: 60px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 1.1rem;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    section {
+      padding: 60px 0;
+    }
+
+    .machines {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .machine-card {
+      background-color: #111;
+      border-radius: 20px;
+      overflow: hidden;
+      padding: 20px;
+      transition: transform 0.4s ease;
+    }
+
+    .machine-card:hover {
+      transform: translateY(-10px);
+    }
+
+    .machine-card img {
+      width: 100%;
+      border-radius: 16px;
+      height: 200px;
+      object-fit: cover;
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #111;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 30px;
+      cursor: pointer;
+      z-index: 999;
+    }
+
+    footer {
+      background: #111;
+      text-align: center;
+      padding: 40px 20px;
+      color: #888;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 15px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+    }
+
+    .form-group button {
+      background: var(--accent);
+      color: #fff;
+      padding: 10px 30px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .newsletter {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .newsletter input {
+      padding: 10px;
+      width: 70%;
+      border-radius: 20px;
+      border: none;
+      outline: none;
+    }
+
+    .newsletter button {
+      padding: 10px 20px;
+      background: var(--accent);
+      border: none;
+      color: #fff;
+      border-radius: 20px;
+      margin-left: 10px;
+    }
+
+    .chat-icon {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--primary);
+      padding: 14px;
+      border-radius: 50%;
+      color: #000;
+      font-size: 20px;
+      z-index: 999;
+      cursor: pointer;
+    }
+  </style>
 </head>
 
 <body>
-  <header class="navbar">
-    <div class="logo">Sip N Chill</div>
-    <nav>
-      <ul class="nav-links">
-        <li><a href="#home">Home</a></li>
-        <li><a href="#story">Brand Story</a></li>
-        <li><a href="#machine">Machine</a></li>
-        <li><a href="#partner">Partner</a></li>
-        <li><a href="#reviews">Reviews</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
+  <button id="themeToggle" class="toggle">🌙</button>
+
+  <header>
+    <img src="logo.png" alt="Sip N Chill logo">
+    <h1>Sip N Chill</h1>
+    <p>Welcome to Sip N Chill — a world of premium vending machines designed for the bold, the ambitious, and the elevated lifestyle. Our machines redefine convenience and luxury for the modern consumer.</p>
   </header>
 
-  <section id="home" class="hero-section">
-    <h1 class="hero-title">Grab. Sip. Chill.</h1>
-    <p class="hero-subtitle">Refreshing drinks, anytime, anywhere – right from our smart vending machines.</p>
-  </section>
-
-  <section id="story" class="section">
-    <h2 class="section-title">Our Brand Story</h2>
-    <p class="section-content">
-      Sip N Chill™ – The Story In a world that never stops moving, we started with a simple question: “What if the best moments of life came in a bottle?” Sip N Chill was born not in a boardroom,but on the streets where people hustle, sweat, study, build dreams, and chase time. 
-      We saw them – students pulling all-nighters, athletes pushing their limits, couples sharing stolen moments, workers catching a break under the sun. They all craved one thing: A moment to pause. A moment to grab, sip, and chill. That’s when the idea sparked to create a brand that didn’t just sell drinks... 
-      But served moments of refreshment in the chaos of life. From energy to calm, from classic Coke to bold Red Bull, from creamy protein to dreamy desserts Sip N Chill is your pocket-sized reset button. Every vending machine we place, every drink we stock – it’s all about you and your moment. 
-      We're not just a vending brand. We’re a movement. We’re the modern-day pause. The luxury of slowing down made accessible to all. Our Mission: To make premium refreshment moments accessible, effortless, and unforgettable. 
-      Our Vision: To be the most loved micro-moment brand where lifestyle meets convenience, and every sip feels like a reward.
-    </p>
-  </section>
-
-  <section id="machine" class="section">
-    <h2 class="section-title">Our Smart Machine</h2>
-    <p class="section-content">
-      Packed with cutting-edge features and designed to impress, our vending machine includes contactless payments, temperature-controlled compartments, and real-time tracking. Stylish, compact, and powerful — it's perfect for campuses, malls, gyms, and offices.
-    </p>
-    <img src="machine.jpg" alt="Sip N Chill Machine" class="machine-image">
-  </section>
-
-  <section id="partner" class="section">
-    <h2 class="section-title">Become a Partner</h2>
-    <p class="section-content">
-      Want to join the vending revolution? Whether you're a property owner, retail space manager, or just someone who loves great drinks, we welcome you to be part of our partner network. Let’s grow together and bring Sip N Chill everywhere.
-    </p>
-    <button class="btn">Become a Partner</button>
-  </section>
-
-  <section id="reviews" class="section">
-    <h2 class="section-title">What Customers Say</h2>
-    <div class="average-rating">
-      <span>⭐️⭐️⭐️⭐️☆</span>
-      <p>4.6 out of 5 based on 1,209 reviews</p>
+  <section class="container">
+    <div class="section-title">
+      <h2>Our Machines</h2>
+      <p>Handpicked and built for purpose — explore our high-performance, luxury vending machines made for gyms, chilling stations, and dessert lovers.</p>
     </div>
-
-    <div class="testimonials">
-      <div class="testimonial">
-        <p>"Tastes amazing and super convenient after my gym session!"</p>
-        <h4>- Aarav K.</h4>
+    <div class="machines">
+      <div class="machine-card">
+        <img src="https://images.unsplash.com/photo-1577902411267-d1fcff2702e9" alt="Gym Vending Machine">
+        <h3>Gym Vending</h3>
+        <p>Fuel your hustle. From protein bars to hydration, our gym vending solutions are tailored for active lifestyles with a premium edge.</p>
       </div>
-      <div class="testimonial">
-        <p>"Sleek design and great flavor variety. My campus feels cooler now!"</p>
-        <h4>- Neha R.</h4>
+      <div class="machine-card">
+        <img src="https://images.unsplash.com/photo-1570813099820-6c1b0f59e911" alt="Drinks Vending Machine">
+        <h3>Drinks Vending</h3>
+        <p>Chill like never before. Enjoy a curated selection of refreshing drinks at your fingertips — cold, convenient, and classy.</p>
       </div>
-      <div class="testimonial">
-        <p>"Honestly, this is the future of on-the-go refreshment. Love it!"</p>
-        <h4>- Rishi M.</h4>
+      <div class="machine-card">
+        <img src="https://images.unsplash.com/photo-1586190848861-99aa4a171e90" alt="Ice Cream Vending Machine">
+        <h3>Ice Cream Vending</h3>
+        <p>Indulge in elegance. Our luxury ice cream vending units offer top-tier flavors in a sleek, touchless experience.</p>
       </div>
     </div>
+  </section>
 
-    <form class="review-form">
-      <h3>Leave a Review</h3>
-      <input type="text" placeholder="Your Name" required>
-      <textarea placeholder="Your Review" required></textarea>
-      <button type="submit">Submit</button>
+  <section class="container">
+    <div class="section-title">
+      <h2>Brand Story</h2>
+      <p>Sip N Chill™ – The Story
+In a world that never stops moving, we started with a simple question:
+
+"What if the best moments of life came in a bottle?"
+
+Sip N Chill was born not in a boardroom, but on the streets – where people hustle, sweat, study, build dreams, and chase time. We saw them – students pulling all-nighters, athletes pushing their limits, couples sharing stolen moments, workers catching a break under the sun.
+
+They all craved one thing:
+A moment to pause.
+A moment to grab, sip, and chill.
+
+That's when the idea sparked – to create a brand that didn't just sell drinks...
+But served moments of refreshment in the chaos of life.
+
+From energy to calm, from classic Coke to bold Red Bull, from creamy protein to dreamy desserts – Sip N Chill is your pocket-sized reset button.
+Every vending machine we place, every drink we stock – it's all about you and your moment.
+
+We're not just a vending brand.
+We're a movement.
+We're the modern-day pause.
+The luxury of slowing down – made accessible to all.
+
+Our Mission:
+To make premium refreshment moments accessible, effortless, and unforgettable.
+
+Our Vision:
+To be the most loved micro-moment brand – where lifestyle meets convenience, and every sip feels like a reward.</p>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="section-title">
+      <h2>FAQs</h2>
+      <p><strong>Q: Where are Sip N Chill machines installed?</strong><br>A: Gyms, cafes, co-working spaces, colleges, and premium public areas.<br><br>
+        <strong>Q: Can I partner with Sip N Chill?</strong><br>A: Yes! Reach out via the contact form below.</p>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="section-title">
+      <h2>Location</h2>
+      <p>Based in Kerala, India. Expanding rapidly across metros and luxury hubs. Interested in bringing Sip N Chill to your space? Let's talk.</p>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="section-title">
+      <h2>Newsletter</h2>
+      <p>Be the first to know about new machines, drops, and premium placements. Join the Sip N Chill elite circle.</p>
+    </div>
+    <div class="newsletter">
+      <input type="email" placeholder="Your Email">
+      <button>Subscribe</button>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="section-title">
+      <h2>Contact Us</h2>
+      <p>Interested in partnerships, custom machines, or location installs? Fill out the form — we'll get back faster than your drink chills.</p>
+    </div>
+    <form action="https://formspree.io/f/mwkgnldj" method="POST">
+      <div class="form-group">
+        <input type="text" name="name" placeholder="Your Name" required>
+      </div>
+      <div class="form-group">
+        <input type="email" name="email" placeholder="Your Email" required>
+      </div>
+      <div class="form-group">
+        <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+      </div>
+      <div class="form-group">
+        <button type="submit">Send Message</button>
+      </div>
     </form>
   </section>
 
-  <section id="contact" class="section">
-    <h2 class="section-title">Contact Us</h2>
-    <p class="section-content">
-      Have a question, feedback, or partnership idea? We’re here for you. Reach out anytime and let’s make chilling better together.
-    </p>
-    <p class="section-content">Email: hello@sipnchill.com | Phone: +91-9876543210</p>
-  </section>
-
-  <footer class="footer">
+  <footer>
     <p>&copy; 2025 Sip N Chill. All rights reserved.</p>
+    <div>
+      <a href="https://instagram.com/sipnchill" target="_blank"><i class="fab fa-instagram"></i></a>
+    </div>
   </footer>
+
+  <div class="chat-icon">
+    <i class="fas fa-comments"></i>
+  </div>
+
+  <script>
+    const themeToggle = document.getElementById('themeToggle');
+    const html = document.documentElement;
+
+    // Initialize
+    if (localStorage.getItem('theme') === 'dark') {
+      html.classList.add('dark');
+      themeToggle.textContent = '☀️';
+    } else if (localStorage.getItem('theme') === 'light') {
+      html.classList.add('light');
+      themeToggle.textContent = '🌙';
+    }
+
+    // Toggle logic
+    themeToggle.addEventListener('click', () => {
+      if (html.classList.contains('dark')) {
+        html.classList.remove('dark');
+        html.classList.add('light');
+        themeToggle.textContent = '🌙';
+        localStorage.setItem('theme', 'light');
+      } else {
+        html.classList.remove('light');
+        html.classList.add('dark');
+        themeToggle.textContent = '☀️';
+        localStorage.setItem('theme', 'dark');
+      }
+    });
+  </script>
 </body>
 
 </html>
