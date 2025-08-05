@@ -29,6 +29,7 @@
       --primary: #00FFFF;
       --accent: #FF3CAC;
       transition: background 0.5s, color 0.5s;
+      overflow-x: hidden;
     }
 
     body.dark {
@@ -49,64 +50,159 @@
 
     header {
       text-align: center;
-      padding: 50px 20px;
+      padding: 100px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at center, var(--primary) 0%, transparent 70%);
+      opacity: 0.1;
+      z-index: -1;
+      transform: scale(0.5);
+      transition: transform 1s ease-out;
+    }
+
+    header.scrolled-in::before {
+      transform: scale(1.5);
     }
 
     header img {
-      height: 60px;
-      margin-bottom: 20px;
+      height: 80px;
+      margin-bottom: 30px;
+      transform: translateY(50px);
+      opacity: 0;
+      transition: transform 0.8s ease-out, opacity 0.8s ease;
+    }
+
+    header.scrolled-in img {
+      transform: translateY(0);
+      opacity: 1;
     }
 
     h1 {
-      font-size: 3rem;
-      margin-bottom: 10px;
+      font-size: 4rem;
+      margin-bottom: 20px;
+      background: linear-gradient(45deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      transform: scale(0.9);
+      opacity: 0;
+      transition: transform 0.8s ease-out, opacity 0.8s ease;
+    }
+
+    header.scrolled-in h1 {
+      transform: scale(1);
+      opacity: 1;
     }
 
     h2 {
-      font-size: 2rem;
+      font-size: 2.5rem;
       margin-bottom: 20px;
+      transform: translateY(30px);
+      opacity: 0;
+      transition: transform 0.8s ease-out, opacity 0.8s ease;
+    }
+
+    .section-title h2 {
+      transform: translateY(30px);
+      opacity: 0;
+    }
+
+    .section-title.scrolled-in h2 {
+      transform: translateY(0);
+      opacity: 1;
     }
 
     p {
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       max-width: 800px;
       margin: auto;
+      transform: translateY(30px);
+      opacity: 0;
+      transition: transform 0.8s ease-out, opacity 0.8s ease;
+    }
+
+    header.scrolled-in p,
+    .section-title.scrolled-in p {
+      transform: translateY(0);
+      opacity: 1;
     }
 
     section {
-      padding: 60px 0;
+      padding: 100px 0;
+      position: relative;
+    }
+
+    section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at center, var(--accent) 0%, transparent 70%);
+      opacity: 0.05;
+      z-index: -1;
+      transform: scale(0.8);
+      transition: transform 1.5s ease-out;
+    }
+
+    section.scrolled-in::before {
+      transform: scale(1.2);
     }
 
     .machines {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 30px;
-      margin-top: 40px;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+      margin-top: 60px;
     }
 
     .machine-card {
       background-color: #111;
-      border-radius: 20px;
+      border-radius: 25px;
       overflow: hidden;
-      padding: 20px;
-      transition: transform 0.4s ease;
+      padding: 30px;
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+      transform: scale(0.95);
+      opacity: 0;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .machine-card.scrolled-in {
+      transform: scale(1);
+      opacity: 1;
     }
 
     .machine-card:hover {
-      transform: translateY(-10px);
+      transform: scale(1.05) translateY(-10px);
+      box-shadow: 0 15px 40px rgba(0, 255, 255, 0.2);
     }
 
     .machine-card img {
       width: 100%;
-      border-radius: 16px;
-      height: 200px;
+      border-radius: 20px;
+      height: 250px;
       object-fit: cover;
-      margin-bottom: 20px;
+      margin-bottom: 25px;
+      transition: transform 0.5s ease;
+    }
+
+    .machine-card:hover img {
+      transform: scale(1.05);
     }
 
     .section-title {
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 60px;
     }
 
     .toggle {
@@ -120,86 +216,234 @@
       border-radius: 30px;
       cursor: pointer;
       z-index: 999;
+      transform: rotate(0deg);
+      transition: transform 0.5s ease;
+    }
+
+    .toggle:hover {
+      transform: rotate(180deg);
     }
 
     footer {
       background: #111;
       text-align: center;
-      padding: 40px 20px;
+      padding: 60px 20px;
       color: #888;
+      position: relative;
+      overflow: hidden;
+    }
+
+    footer::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at center, var(--primary) 0%, transparent 70%);
+      opacity: 0.05;
+      z-index: -1;
     }
 
     .form-group {
-      margin-bottom: 20px;
+      margin-bottom: 30px;
+      transform: translateY(30px);
+      opacity: 0;
+      transition: transform 0.8s ease-out, opacity 0.8s ease;
+    }
+
+    .scrolled-in .form-group {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .form-group:nth-child(2) {
+      transition-delay: 0.2s;
+    }
+
+    .form-group:nth-child(3) {
+      transition-delay: 0.4s;
+    }
+
+    .form-group:nth-child(4) {
+      transition-delay: 0.6s;
     }
 
     .form-group input, .form-group textarea {
       width: 100%;
-      padding: 15px;
-      border-radius: 10px;
+      padding: 18px;
+      border-radius: 15px;
       border: none;
       outline: none;
+      font-size: 1.1rem;
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--text);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .form-group input:focus, .form-group textarea:focus {
+      transform: scale(1.02);
+      box-shadow: 0 0 20px rgba(255, 60, 172, 0.3);
     }
 
     .form-group button {
       background: var(--accent);
       color: #fff;
-      padding: 10px 30px;
+      padding: 15px 40px;
       border: none;
-      border-radius: 20px;
+      border-radius: 25px;
       cursor: pointer;
-      font-size: 1rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .form-group button:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(255, 60, 172, 0.4);
     }
 
     .newsletter {
       text-align: center;
-      margin-top: 20px;
+      margin-top: 40px;
+      transform: translateY(30px);
+      opacity: 0;
+      transition: transform 0.8s ease-out, opacity 0.8s ease;
+    }
+
+    .scrolled-in .newsletter {
+      transform: translateY(0);
+      opacity: 1;
     }
 
     .newsletter input {
-      padding: 10px;
-      width: 70%;
-      border-radius: 20px;
+      padding: 15px;
+      width: 60%;
+      border-radius: 25px;
       border: none;
       outline: none;
+      font-size: 1.1rem;
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--text);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .newsletter input:focus {
+      transform: scale(1.02);
+      box-shadow: 0 0 20px rgba(255, 60, 172, 0.3);
     }
 
     .newsletter button {
-      padding: 10px 20px;
+      padding: 15px 30px;
       background: var(--accent);
       border: none;
       color: #fff;
-      border-radius: 20px;
-      margin-left: 10px;
+      border-radius: 25px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-left: 15px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .newsletter button:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(255, 60, 172, 0.4);
     }
 
     .chat-icon {
       position: fixed;
-      bottom: 20px;
-      right: 20px;
+      bottom: 30px;
+      right: 30px;
       background: var(--primary);
-      padding: 14px;
+      padding: 18px;
       border-radius: 50%;
       color: #000;
-      font-size: 20px;
+      font-size: 24px;
       z-index: 999;
       cursor: pointer;
+      transform: scale(0);
+      transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 5px 20px rgba(0, 255, 255, 0.4);
+    }
+
+    .chat-icon.scrolled-in {
+      transform: scale(1);
+    }
+
+    .chat-icon:hover {
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    /* Gradient underline for headings */
+    .gradient-underline {
+      position: relative;
+      display: inline-block;
+    }
+
+    .gradient-underline::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      border-radius: 2px;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.8s ease-out;
+    }
+
+    .scrolled-in .gradient-underline::after {
+      transform: scaleX(1);
+    }
+
+    /* Floating particles background */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      pointer-events: none;
+    }
+
+    .particle {
+      position: absolute;
+      background: var(--primary);
+      border-radius: 50%;
+      opacity: 0.2;
+      animation: float linear infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0) translateX(0); }
+      50% { transform: translateY(-100px) translateX(50px); }
+      100% { transform: translateY(0) translateX(0); }
     }
   </style>
 </head>
 
 <body>
+  <div class="particles" id="particles"></div>
   <button id="themeToggle" class="toggle">🌙</button>
 
-  <header>
+  <header id="main-header">
     <img src="logo.png" alt="Sip N Chill logo">
-    <h1>Sip N Chill</h1>
+    <h1 class="gradient-underline">Sip N Chill</h1>
     <p>Welcome to Sip N Chill — a world of premium vending machines designed for the bold, the ambitious, and the elevated lifestyle. Our machines redefine convenience and luxury for the modern consumer.</p>
   </header>
 
-  <section class="container">
+  <section class="container" id="machines-section">
     <div class="section-title">
-      <h2>Our Machines</h2>
+      <h2 class="gradient-underline">Our Machines</h2>
       <p>Handpicked and built for purpose — explore our high-performance, luxury vending machines made for gyms, chilling stations, and dessert lovers.</p>
     </div>
     <div class="machines">
@@ -221,57 +465,37 @@
     </div>
   </section>
 
-  <section class="container">
+  <section class="container" id="story-section">
     <div class="section-title">
-      <h2>Brand Story</h2>
-      <p>Sip N Chill™ – The Story
-In a world that never stops moving, we started with a simple question:
-
-"What if the best moments of life came in a bottle?"
-
-Sip N Chill was born not in a boardroom, but on the streets – where people hustle, sweat, study, build dreams, and chase time. We saw them – students pulling all-nighters, athletes pushing their limits, couples sharing stolen moments, workers catching a break under the sun.
-
-They all craved one thing:
-A moment to pause.
-A moment to grab, sip, and chill.
-
-That's when the idea sparked – to create a brand that didn't just sell drinks...
-But served moments of refreshment in the chaos of life.
-
-From energy to calm, from classic Coke to bold Red Bull, from creamy protein to dreamy desserts – Sip N Chill is your pocket-sized reset button.
-Every vending machine we place, every drink we stock – it's all about you and your moment.
-
-We're not just a vending brand.
-We're a movement.
-We're the modern-day pause.
-The luxury of slowing down – made accessible to all.
-
-Our Mission:
-To make premium refreshment moments accessible, effortless, and unforgettable.
-
-Our Vision:
-To be the most loved micro-moment brand – where lifestyle meets convenience, and every sip feels like a reward.</p>
+      <h2 class="gradient-underline">Brand Story</h2>
+      <p>Sip N Chill™ – The Story<br><br>
+      In a world that never stops moving, we started with a simple question:<br><br>
+      "What if the best moments of life came in a bottle?"<br><br>
+      Sip N Chill was born not in a boardroom, but on the streets – where people hustle, sweat, study, build dreams, and chase time. We saw them – students pulling all-nighters, athletes pushing their limits, couples sharing stolen moments, workers catching a break under the sun.<br><br>
+      They all craved one thing:<br>
+      A moment to pause.<br>
+      A moment to grab, sip, and chill.</p>
     </div>
   </section>
 
-  <section class="container">
+  <section class="container" id="faq-section">
     <div class="section-title">
-      <h2>FAQs</h2>
+      <h2 class="gradient-underline">FAQs</h2>
       <p><strong>Q: Where are Sip N Chill machines installed?</strong><br>A: Gyms, cafes, co-working spaces, colleges, and premium public areas.<br><br>
         <strong>Q: Can I partner with Sip N Chill?</strong><br>A: Yes! Reach out via the contact form below.</p>
     </div>
   </section>
 
-  <section class="container">
+  <section class="container" id="location-section">
     <div class="section-title">
-      <h2>Location</h2>
+      <h2 class="gradient-underline">Location</h2>
       <p>Based in Kerala, India. Expanding rapidly across metros and luxury hubs. Interested in bringing Sip N Chill to your space? Let's talk.</p>
     </div>
   </section>
 
-  <section class="container">
+  <section class="container" id="newsletter-section">
     <div class="section-title">
-      <h2>Newsletter</h2>
+      <h2 class="gradient-underline">Newsletter</h2>
       <p>Be the first to know about new machines, drops, and premium placements. Join the Sip N Chill elite circle.</p>
     </div>
     <div class="newsletter">
@@ -280,9 +504,9 @@ To be the most loved micro-moment brand – where lifestyle meets convenience, a
     </div>
   </section>
 
-  <section class="container">
+  <section class="container" id="contact-section">
     <div class="section-title">
-      <h2>Contact Us</h2>
+      <h2 class="gradient-underline">Contact Us</h2>
       <p>Interested in partnerships, custom machines, or location installs? Fill out the form — we'll get back faster than your drink chills.</p>
     </div>
     <form action="https://formspree.io/f/mwkgnldj" method="POST">
@@ -313,10 +537,11 @@ To be the most loved micro-moment brand – where lifestyle meets convenience, a
   </div>
 
   <script>
+    // Theme toggle functionality
     const themeToggle = document.getElementById('themeToggle');
     const html = document.documentElement;
 
-    // Initialize
+    // Initialize theme
     if (localStorage.getItem('theme') === 'dark') {
       html.classList.add('dark');
       themeToggle.textContent = '☀️';
@@ -325,7 +550,7 @@ To be the most loved micro-moment brand – where lifestyle meets convenience, a
       themeToggle.textContent = '🌙';
     }
 
-    // Toggle logic
+    // Toggle theme
     themeToggle.addEventListener('click', () => {
       if (html.classList.contains('dark')) {
         html.classList.remove('dark');
@@ -338,6 +563,67 @@ To be the most loved micro-moment brand – where lifestyle meets convenience, a
         themeToggle.textContent = '☀️';
         localStorage.setItem('theme', 'dark');
       }
+    });
+
+    // Scroll animations
+    const animateOnScroll = () => {
+      const elements = document.querySelectorAll('header, .section-title, .machine-card, .form-group, .newsletter, .chat-icon');
+      
+      elements.forEach(element => {
+        const elementPosition = element.getBoundingClientRect().top;
+        const screenPosition = window.innerHeight / 1.2;
+
+        if (elementPosition < screenPosition) {
+          element.classList.add('scrolled-in');
+        }
+      });
+    };
+
+    // Initialize animations on load
+    window.addEventListener('load', () => {
+      animateOnScroll();
+      
+      // Animate header immediately since it's in view
+      document.querySelector('header').classList.add('scrolled-in');
+    });
+
+    // Animate on scroll
+    window.addEventListener('scroll', animateOnScroll);
+
+    // Create floating particles
+    const particlesContainer = document.getElementById('particles');
+    const particleCount = 30;
+
+    for (let i = 0; i < particleCount; i++) {
+      const particle = document.createElement('div');
+      particle.classList.add('particle');
+      
+      // Random size between 2px and 8px
+      const size = Math.random() * 6 + 2;
+      particle.style.width = `${size}px`;
+      particle.style.height = `${size}px`;
+      
+      // Random position
+      particle.style.left = `${Math.random() * 100}%`;
+      particle.style.top = `${Math.random() * 100}%`;
+      
+      // Random animation duration and delay
+      const duration = Math.random() * 20 + 10;
+      const delay = Math.random() * 5;
+      particle.style.animation = `float ${duration}s ${delay}s infinite`;
+      
+      particlesContainer.appendChild(particle);
+    }
+
+    // Add hover effect to machine cards
+    const machineCards = document.querySelectorAll('.machine-card');
+    machineCards.forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        card.querySelector('img').style.transform = 'scale(1.05)';
+      });
+      card.addEventListener('mouseleave', () => {
+        card.querySelector('img').style.transform = 'scale(1)';
+      });
     });
   </script>
 </body>
