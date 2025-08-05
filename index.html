@@ -55,6 +55,83 @@
       font-weight: 700;
     }
 
+    /* Luxury Navigation Bar */
+    .luxury-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 25px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      background: rgba(10, 10, 10, 0.8);
+      backdrop-filter: blur(10px);
+      transition: var(--transition);
+    }
+
+    .light-mode .luxury-nav {
+      background: rgba(249, 249, 249, 0.8);
+    }
+
+    .luxury-nav.scrolled {
+      padding: 15px 40px;
+      box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-logo {
+      height: 40px;
+      transition: var(--transition);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+    }
+
+    .nav-link {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      position: relative;
+      transition: var(--transition);
+      opacity: 0.9;
+    }
+
+    .nav-link:hover {
+      opacity: 1;
+      color: var(--primary);
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      transition: var(--transition);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    /* Mobile Menu Toggle */
+    .mobile-menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 1.5rem;
+      cursor: pointer;
+      z-index: 1001;
+    }
+
+    /* Container */
     .container {
       max-width: 1400px;
       margin: 0 auto;
@@ -470,6 +547,120 @@
       transform: scale(1.1);
     }
 
+    /* FAQ Section */
+    .faq-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      margin-top: 60px;
+    }
+
+    .faq-submission, .faq-questions {
+      background-color: var(--card-bg);
+      border-radius: 25px;
+      padding: 50px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      transform: translateY(50px);
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    section.scrolled-in .faq-submission,
+    section.scrolled-in .faq-questions {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .faq-submission {
+      transition-delay: 0.1s;
+    }
+
+    .faq-questions {
+      transition-delay: 0.2s;
+    }
+
+    .faq-form h3, .faq-list h3 {
+      font-size: 2rem;
+      margin-bottom: 30px;
+      color: var(--primary);
+    }
+
+    .faq-form input,
+    .faq-form textarea {
+      width: 100%;
+      padding: 20px;
+      border-radius: 15px;
+      border: none;
+      background-color: var(--input-bg);
+      color: var(--text);
+      font-size: 1rem;
+      margin-bottom: 25px;
+      transition: var(--transition);
+    }
+
+    .faq-form textarea {
+      resize: none;
+      min-height: 150px;
+    }
+
+    .faq-form input:focus,
+    .faq-form textarea:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px var(--primary);
+    }
+
+    .submit-faq {
+      background: linear-gradient(45deg, var(--primary), var(--accent));
+      color: white;
+      border: none;
+      padding: 15px 40px;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 5px 15px rgba(0, 200, 200, 0.3);
+    }
+
+    .submit-faq:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 200, 200, 0.4);
+    }
+
+    .faq-item {
+      background-color: var(--input-bg);
+      border-radius: 15px;
+      padding: 25px;
+      margin-bottom: 25px;
+      position: relative;
+    }
+
+    .faq-question {
+      font-weight: 600;
+      margin-bottom: 15px;
+      color: var(--primary);
+      font-size: 1.2rem;
+    }
+
+    .faq-answer {
+      opacity: 0.9;
+    }
+
+    .delete-faq {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      color: #ff6b6b;
+      cursor: pointer;
+      opacity: 0.7;
+      transition: var(--transition);
+    }
+
+    .delete-faq:hover {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+
     /* Newsletter Section */
     .newsletter-form {
       max-width: 700px;
@@ -728,12 +919,41 @@
     }
 
     @media (max-width: 992px) {
-      .ratings-container {
+      .ratings-container,
+      .faq-container {
         grid-template-columns: 1fr;
       }
       
       .machines {
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      }
+
+      .luxury-nav {
+        padding: 20px;
+      }
+
+      .nav-links {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        height: 100vh;
+        background: var(--card-bg);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 30px;
+        transition: var(--transition);
+        z-index: 1000;
+      }
+
+      .nav-links.active {
+        right: 0;
+      }
+
+      .mobile-menu-toggle {
+        display: block;
+        z-index: 1001;
       }
     }
 
@@ -750,7 +970,8 @@
         padding: 0 20px;
       }
       
-      .machine-card, .add-rating, .existing-ratings {
+      .machine-card, .add-rating, .existing-ratings,
+      .faq-submission, .faq-questions {
         padding: 30px;
       }
       
@@ -779,12 +1000,32 @@
       .machine-card {
         padding: 25px;
       }
+
+      .luxury-nav {
+        padding: 15px;
+      }
     }
   </style>
 </head>
 
 <body>
   <div class="floating-elements" id="floatingElements"></div>
+  
+  <!-- Luxury Navigation Bar -->
+  <nav class="luxury-nav" id="luxuryNav">
+    <img src="logo.png" alt="Sip N Chill" class="nav-logo">
+    <div class="nav-links" id="navLinks">
+      <a href="#machines-section" class="nav-link">Machines</a>
+      <a href="#story-section" class="nav-link">Story</a>
+      <a href="#ratings-section" class="nav-link">Reviews</a>
+      <a href="#faq-section" class="nav-link">FAQs</a>
+      <a href="#location-section" class="nav-link">Locations</a>
+      <a href="#contact-section" class="nav-link">Contact</a>
+    </div>
+    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+      <i class="fas fa-bars"></i>
+    </button>
+  </nav>
   
   <div class="theme-toggle" id="themeToggle">
     <i class="fas fa-moon"></i>
@@ -872,8 +1113,36 @@
     <div class="container">
       <div class="section-title">
         <h2>FAQs</h2>
-        <p><strong>Q: Where are Sip N Chill machines installed?</strong><br>A: Gyms, cafes, co-working spaces, colleges, and premium public areas.<br><br>
-          <strong>Q: Can I partner with Sip N Chill?</strong><br>A: Yes! Reach out via the contact form below.</p>
+        <p>Find answers to common questions or ask your own about our premium vending solutions.</p>
+      </div>
+      <div class="faq-container">
+        <div class="faq-submission">
+          <form class="faq-form" id="faqForm">
+            <h3>Ask Your Question</h3>
+            <input type="text" id="faqName" placeholder="Your Name" required>
+            <input type="email" id="faqEmail" placeholder="Your Email" required>
+            <textarea id="faqQuestion" placeholder="Your Question" required></textarea>
+            <button type="submit" class="submit-faq">Submit Question</button>
+          </form>
+        </div>
+        <div class="faq-questions">
+          <h3>Frequently Asked Questions</h3>
+          <div class="faq-list" id="faqList">
+            <div class="faq-item">
+              <div class="faq-question">Where are Sip N Chill machines installed?</div>
+              <div class="faq-answer">Our machines are currently installed in premium gyms, corporate offices, co-working spaces, universities, and luxury residential buildings across major cities. We're expanding rapidly to new locations.</div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-question">Can I partner with Sip N Chill?</div>
+              <div class="faq-answer">Absolutely! We welcome partnerships with businesses and property owners. Please contact us through our partnership form and our team will get back to you within 24 hours.</div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-question">How often are the machines restocked?</div>
+              <div class="faq-answer">Our premium machines are restocked daily or every other day, depending on location usage. Each machine has real-time inventory tracking to ensure optimal stock levels.</div>
+            </div>
+            <!-- More FAQs will be added here dynamically -->
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -965,6 +1234,24 @@
       }
     });
     
+    // Mobile Menu Toggle
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const navLinks = document.getElementById('navLinks');
+    
+    mobileMenuToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+      mobileMenuToggle.innerHTML = navLinks.classList.contains('active') ? 
+        '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+    });
+    
+    // Close mobile menu when clicking a link
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+        mobileMenuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+      });
+    });
+    
     // Scroll Animations
     const animateOnScroll = () => {
       const elements = document.querySelectorAll('header, section');
@@ -983,6 +1270,14 @@
         document.querySelector('.chat-icon').classList.add('scrolled-in');
       } else {
         document.querySelector('.chat-icon').classList.remove('scrolled-in');
+      }
+      
+      // Navbar scroll effect
+      const nav = document.getElementById('luxuryNav');
+      if (window.scrollY > 50) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
       }
     };
     
@@ -1149,6 +1444,50 @@
       ratingsList.prepend(ratingItem);
     }
     
+    // FAQ Submission System
+    const faqForm = document.getElementById('faqForm');
+    const faqList = document.getElementById('faqList');
+    
+    faqForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const name = document.getElementById('faqName').value;
+      const email = document.getElementById('faqEmail').value;
+      const question = document.getElementById('faqQuestion').value;
+      
+      if (!name || !email || !question) {
+        alert('Please fill all fields');
+        return;
+      }
+      
+      // In a real app, you would send this to your server
+      console.log('New FAQ submission:', { name, email, question });
+      
+      // Create new FAQ item (admin would typically answer first)
+      const newFaq = document.createElement('div');
+      newFaq.className = 'faq-item';
+      newFaq.innerHTML = `
+        <div class="faq-question">${question} <span style="color: var(--accent); font-size: 0.9rem;">(Pending response)</span></div>
+        <div class="faq-answer">Thank you for your question! Our team will review it and respond via email within 24 hours.</div>
+        <div style="margin-top: 15px; font-size: 0.9rem; opacity: 0.7;">Submitted by: ${name}</div>
+        <span class="delete-faq"><i class="fas fa-trash"></i></span>
+      `;
+      
+      // Add delete functionality
+      const deleteBtn = newFaq.querySelector('.delete-faq');
+      deleteBtn.addEventListener('click', () => {
+        newFaq.remove();
+      });
+      
+      faqList.prepend(newFaq);
+      
+      // Show success message
+      alert('Thank you for your question! We\'ll respond via email shortly.');
+      
+      // Reset form
+      faqForm.reset();
+    });
+    
     // Newsletter Subscription
     const newsletterForm = document.getElementById('newsletterForm');
     
@@ -1175,6 +1514,20 @@
     // Chat icon functionality
     document.querySelector('.chat-icon').addEventListener('click', () => {
       alert('Our customer service team will be with you shortly. For immediate assistance, please call +1 (555) 123-4567');
+    });
+    
+    // Smooth scrolling for nav links
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = link.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        
+        window.scrollTo({
+          top: targetElement.offsetTop - 100,
+          behavior: 'smooth'
+        });
+      });
     });
   </script>
 </body>
