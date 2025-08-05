@@ -1,176 +1,350 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Copy the same head section from your main index.html -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sip N Chill | Ice Cream Vending Machines</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
-    /* Add these new styles */
-    .machine-details {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 60px 20px;
+    :root {
+      --bg: #0a0a0a;
+      --text: #f5f5f5;
+      --primary: #00c8c8;
+      --accent: #ff3cac;
+      --gold: #ffd700;
+      --card-bg: #1a1a1a;
+      --input-bg: rgba(255, 255, 255, 0.08);
+      --transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    
+
+    .light-mode {
+      --bg: #f9f9f9;
+      --text: #333333;
+      --card-bg: #ffffff;
+      --input-bg: rgba(0, 0, 0, 0.05);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.8;
+      transition: var(--transition);
+    }
+
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    /* Machine Details Page Styles */
+    .machine-details {
+      padding: 120px 0;
+    }
+
     .machine-hero {
       display: flex;
       gap: 60px;
       margin-bottom: 80px;
       align-items: center;
     }
-    
+
     .machine-hero-image {
       flex: 1;
       border-radius: 30px;
       overflow: hidden;
       box-shadow: 0 30px 60px rgba(0,0,0,0.2);
     }
-    
+
     .machine-hero-image img {
       width: 100%;
       height: auto;
       display: block;
     }
-    
+
     .machine-hero-content {
       flex: 1;
     }
-    
+
+    .machine-hero-content h1 {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      background: linear-gradient(45deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .subtitle {
+      font-size: 1.5rem;
+      margin-bottom: 30px;
+      opacity: 0.9;
+    }
+
+    .highlights {
+      margin-top: 30px;
+    }
+
+    .highlights p {
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .highlights i {
+      color: var(--primary);
+    }
+
     .features-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 40px;
       margin: 60px 0;
     }
-    
+
     .feature-card {
       background: var(--card-bg);
       padding: 40px;
       border-radius: 20px;
       transition: var(--transition);
     }
-    
+
     .feature-card:hover {
       transform: translateY(-10px);
       box-shadow: 0 20px 40px rgba(0,200,200,0.1);
     }
-    
+
     .feature-card i {
       font-size: 2.5rem;
       color: var(--primary);
       margin-bottom: 20px;
     }
-    
+
+    .feature-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+    }
+
     .partner-form {
       background: var(--card-bg);
       padding: 60px;
       border-radius: 30px;
       margin-top: 80px;
     }
+
+    .partner-form h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    .partner-form p {
+      margin-bottom: 40px;
+      font-size: 1.1rem;
+    }
+
+    .form-group {
+      margin-bottom: 25px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 15px 20px;
+      border-radius: 10px;
+      border: none;
+      background-color: var(--input-bg);
+      color: var(--text);
+      font-size: 1rem;
+      transition: var(--transition);
+    }
+
+    .form-group textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px var(--primary);
+    }
+
+    .submit-button {
+      background: linear-gradient(45deg, var(--primary), var(--accent));
+      color: white;
+      border: none;
+      padding: 15px 40px;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 5px 15px rgba(0, 200, 200, 0.3);
+      margin-top: 20px;
+    }
+
+    .submit-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 200, 200, 0.4);
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 992px) {
+      .machine-hero {
+        flex-direction: column;
+      }
+      
+      .machine-hero-image,
+      .machine-hero-content {
+        flex: none;
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .machine-hero-content h1 {
+        font-size: 2.8rem;
+      }
+      
+      .partner-form {
+        padding: 40px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .container {
+        padding: 0 20px;
+      }
+      
+      .machine-hero-content h1 {
+        font-size: 2.2rem;
+      }
+      
+      .subtitle {
+        font-size: 1.2rem;
+      }
+      
+      .partner-form {
+        padding: 30px 20px;
+      }
+    }
   </style>
 </head>
 <body>
-  <!-- Copy the same floating elements, nav, and theme toggle from index.html -->
-  
-  <div class="machine-details">
-    <div class="machine-hero">
-      <div class="machine-hero-image">
-        <img src="icecream-vending-large.png" alt="Premium Ice Cream Vending Machine">
+  <div class="container">
+    <div class="machine-details">
+      <div class="machine-hero">
+        <div class="machine-hero-image">
+          <img src="icecream-vending-large.png" alt="Premium Ice Cream Vending Machine">
+        </div>
+        <div class="machine-hero-content">
+          <h1>Ice Cream Vending Machines</h1>
+          <p class="subtitle">Luxury frozen dessert experiences at the touch of a button</p>
+          <p>Our premium ice cream vending solutions bring gourmet frozen desserts to your location with 24/7 availability and unmatched quality. Perfect for offices, residential buildings, and leisure destinations.</p>
+          
+          <div class="highlights">
+            <p><i class="fas fa-check-circle"></i> Touchless operation</p>
+            <p><i class="fas fa-check-circle"></i> -18°C perfect serving temperature</p>
+            <p><i class="fas fa-check-circle"></i> Real-time inventory monitoring</p>
+          </div>
+        </div>
       </div>
-      <div class="machine-hero-content">
-        <h1>Ice Cream Vending Machines</h1>
-        <p class="subtitle">Luxury frozen dessert experiences at the touch of a button</p>
-        <p>Our premium ice cream vending solutions bring gourmet frozen desserts to your location with 24/7 availability and unmatched quality.</p>
+      
+      <h2>Key Features</h2>
+      
+      <div class="features-grid">
+        <div class="feature-card">
+          <i class="fas fa-snowflake"></i>
+          <h3>Advanced Cooling</h3>
+          <p>Patented cooling system maintains perfect serving temperature without crystallization.</p>
+        </div>
         
-        <div class="highlights">
-          <p><i class="fas fa-check-circle"></i> Touchless operation</p>
-          <p><i class="fas fa-check-circle"></i> -18°C perfect serving temperature</p>
-          <p><i class="fas fa-check-circle"></i> Real-time inventory monitoring</p>
+        <div class="feature-card">
+          <i class="fas fa-touchscreen"></i>
+          <h3>Interactive Display</h3>
+          <p>High-resolution touchscreen with product visualization and nutritional information.</p>
         </div>
-      </div>
-    </div>
-    
-    <h2 class="section-title">Key Features</h2>
-    
-    <div class="features-grid">
-      <div class="feature-card">
-        <i class="fas fa-snowflake"></i>
-        <h3>Advanced Cooling</h3>
-        <p>Patented cooling system maintains perfect serving temperature without crystallization.</p>
+        
+        <div class="feature-card">
+          <i class="fas fa-bolt"></i>
+          <h3>Energy Efficient</h3>
+          <p>Eco-friendly refrigeration uses 40% less energy than conventional systems.</p>
+        </div>
+        
+        <div class="feature-card">
+          <i class="fas fa-shield-alt"></i>
+          <h3>Hygienic Design</h3>
+          <p>Antimicrobial surfaces and contactless payment options for maximum safety.</p>
+        </div>
+        
+        <div class="feature-card">
+          <i class="fas fa-chart-line"></i>
+          <h3>Smart Analytics</h3>
+          <p>Real-time sales data and predictive restocking alerts via our management portal.</p>
+        </div>
+        
+        <div class="feature-card">
+          <i class="fas fa-palette"></i>
+          <h3>Custom Branding</h3>
+          <p>Tailored exterior designs to match your location's aesthetic.</p>
+        </div>
       </div>
       
-      <div class="feature-card">
-        <i class="fas fa-touchscreen"></i>
-        <h3>Interactive Display</h3>
-        <p>High-resolution touchscreen with product visualization and nutritional information.</p>
+      <div class="partner-form">
+        <h2>Partner With Us</h2>
+        <p>Bring Sip N Chill's premium ice cream vending to your location. Fill out the form below and our partnership team will contact you within 24 hours.</p>
+        
+        <form id="partnerForm">
+          <div class="form-group">
+            <input type="text" placeholder="Your Name" required>
+          </div>
+          <div class="form-group">
+            <input type="email" placeholder="Your Email" required>
+          </div>
+          <div class="form-group">
+            <input type="text" placeholder="Business Name" required>
+          </div>
+          <div class="form-group">
+            <input type="text" placeholder="Location Address" required>
+          </div>
+          <div class="form-group">
+            <select required>
+              <option value="">Type of Location</option>
+              <option>Office/Workplace</option>
+              <option>Residential Building</option>
+              <option>Hotel/Resort</option>
+              <option>University/School</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <textarea placeholder="Additional Information" rows="4"></textarea>
+          </div>
+          <button type="submit" class="submit-button">Request Partnership</button>
+        </form>
       </div>
-      
-      <div class="feature-card">
-        <i class="fas fa-bolt"></i>
-        <h3>Energy Efficient</h3>
-        <p>Eco-friendly refrigeration uses 40% less energy than conventional systems.</p>
-      </div>
-      
-      <div class="feature-card">
-        <i class="fas fa-shield-alt"></i>
-        <h3>Hygienic Design</h3>
-        <p>Antimicrobial surfaces and contactless payment options for maximum safety.</p>
-      </div>
-      
-      <div class="feature-card">
-        <i class="fas fa-chart-line"></i>
-        <h3>Smart Analytics</h3>
-        <p>Real-time sales data and predictive restocking alerts via our management portal.</p>
-      </div>
-      
-      <div class="feature-card">
-        <i class="fas fa-palette"></i>
-        <h3>Custom Branding</h3>
-        <p>Tailored exterior designs to match your location's aesthetic.</p>
-      </div>
-    </div>
-    
-    <div class="partner-form">
-      <h2>Partner With Us</h2>
-      <p>Bring Sip N Chill's premium ice cream vending to your location. Fill out the form below and our partnership team will contact you within 24 hours.</p>
-      
-      <form id="partnerForm">
-        <div class="form-group">
-          <input type="text" placeholder="Your Name" required>
-        </div>
-        <div class="form-group">
-          <input type="email" placeholder="Your Email" required>
-        </div>
-        <div class="form-group">
-          <input type="text" placeholder="Business Name" required>
-        </div>
-        <div class="form-group">
-          <input type="text" placeholder="Location Address" required>
-        </div>
-        <div class="form-group">
-          <select required>
-            <option value="">Type of Location</option>
-            <option>Gym/Fitness Center</option>
-            <option>Office/Workplace</option>
-            <option>University/School</option>
-            <option>Residential Building</option>
-            <option>Hotel/Resort</option>
-            <option>Other</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <textarea placeholder="Additional Information" rows="4"></textarea>
-        </div>
-        <button type="submit" class="submit-button">Request Partnership</button>
-      </form>
     </div>
   </div>
-  
-  <!-- Copy the same footer from index.html -->
-  
+
   <script>
-    // Copy the same scripts from index.html
-    
-    // Add this new script for the partner form
+    // Partner Form Submission
     document.getElementById('partnerForm').addEventListener('submit', function(e) {
       e.preventDefault();
       alert('Thank you for your partnership request! Our team will contact you within 24 hours.');
