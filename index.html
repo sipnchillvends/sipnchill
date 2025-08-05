@@ -345,6 +345,7 @@
       position: relative;
       z-index: 1;
       perspective: 1000px;
+      cursor: pointer;
     }
 
     section.scrolled-in .machine-card {
@@ -402,6 +403,20 @@
     .machine-card p {
       font-size: 1.1rem;
       opacity: 0.9;
+    }
+
+    .view-more {
+      color: var(--primary);
+      font-weight: 600;
+      margin-top: 20px;
+      display: inline-block;
+      transition: var(--transition);
+      opacity: 0.8;
+    }
+
+    .machine-card:hover .view-more {
+      opacity: 1;
+      transform: translateX(5px);
     }
 
     /* Ratings Section */
@@ -1049,20 +1064,23 @@
         <p>Handpicked and built for purpose — explore our high-performance, luxury vending machines made for gyms, chilling stations, and dessert lovers.</p>
       </div>
       <div class="machines">
-        <div class="machine-card">
+        <div class="machine-card" onclick="window.location.href='gym-vending.html'">
           <img src="gym-vending.png" alt="Gym Vending Machine">
           <h3>Gym Vending</h3>
           <p>Fuel your hustle. From protein bars to hydration, our gym vending solutions are tailored for active lifestyles with a premium edge.</p>
+          <div class="view-more">View Details →</div>
         </div>
-        <div class="machine-card">
+        <div class="machine-card" onclick="window.location.href='drinks-vending.html'">
           <img src="drinks-vending.png" alt="Drinks Vending Machine">
           <h3>Drinks Vending</h3>
           <p>Chill like never before. Enjoy a curated selection of refreshing drinks at your fingertips — cold, convenient, and classy.</p>
+          <div class="view-more">View Details →</div>
         </div>
-        <div class="machine-card">
+        <div class="machine-card" onclick="window.location.href='icecream-vending.html'">
           <img src="icecream-vending.png" alt="Ice Cream Vending Machine">
           <h3>Ice Cream Vending</h3>
           <p>Indulge in elegance. Our luxury ice cream vending units offer top-tier flavors in a sleek, touchless experience.</p>
+          <div class="view-more">View Details →</div>
         </div>
       </div>
     </div>
