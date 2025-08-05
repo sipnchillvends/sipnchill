@@ -1044,10 +1044,6 @@
     </div>
   </nav>
   
-  <div class="theme-toggle" id="themeToggle">
-    <i class="fas fa-moon"></i>
-  </div>
-  
   <header id="main-header">
     <img src="logo.png" alt="Sip N Chill logo">
     <h1>Sip N Chill</h1>
@@ -1230,30 +1226,7 @@
   </div>
   
   <script>
-    // Theme Toggle Functionality
-    const themeToggle = document.getElementById('themeToggle');
-    const body = document.body;
-    
-    // Check for saved theme preference
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'light') {
-      body.classList.add('light-mode');
-      themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-    }
-    
-    // Toggle theme
-    themeToggle.addEventListener('click', () => {
-      body.classList.toggle('light-mode');
-      
-      if (body.classList.contains('light-mode')) {
-        localStorage.setItem('theme', 'light');
-        themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-      } else {
-        localStorage.setItem('theme', 'dark');
-        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-      }
-    });
-    
+   
     // Mobile Menu Toggle
     const mobileMenuToggle = document.getElementById('mobileMenuToggle');
     const navLinks = document.getElementById('navLinks');
