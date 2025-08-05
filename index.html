@@ -55,15 +55,15 @@
       font-weight: 700;
     }
 
-    /* Luxury Navigation Bar */
+    /* Luxury Navigation Bar - Centered */
     .luxury-nav {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
-      padding: 25px 40px;
+      padding: 25px 0;
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
       z-index: 1000;
       background: rgba(10, 10, 10, 0.8);
@@ -76,8 +76,17 @@
     }
 
     .luxury-nav.scrolled {
-      padding: 15px 40px;
+      padding: 15px 0;
       box-shadow: 0 5px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      max-width: 1400px;
+      padding: 0 40px;
     }
 
     .nav-logo {
@@ -138,20 +147,6 @@
       padding: 0 40px;
     }
 
-    /* Luxury Scrollbar */
-    ::-webkit-scrollbar {
-      width: 10px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: var(--card-bg);
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: var(--primary);
-      border-radius: 10px;
-    }
-
     /* Header Styles */
     header {
       height: 100vh;
@@ -163,6 +158,7 @@
       position: relative;
       overflow: hidden;
       padding: 0 20px;
+      margin-top: 80px; /* Added to account for fixed nav */
     }
 
     header::before {
@@ -929,7 +925,11 @@
       }
 
       .luxury-nav {
-        padding: 20px;
+        padding: 20px 0;
+      }
+
+      .nav-container {
+        padding: 0 20px;
       }
 
       .nav-links {
@@ -1002,7 +1002,7 @@
       }
 
       .luxury-nav {
-        padding: 15px;
+        padding: 15px 0;
       }
     }
   </style>
@@ -1011,20 +1011,22 @@
 <body>
   <div class="floating-elements" id="floatingElements"></div>
   
-  <!-- Luxury Navigation Bar -->
+  <!-- Luxury Navigation Bar - Centered -->
   <nav class="luxury-nav" id="luxuryNav">
-    <img src="logo.png" alt="Sip N Chill" class="nav-logo">
-    <div class="nav-links" id="navLinks">
-      <a href="#machines-section" class="nav-link">Machines</a>
-      <a href="#story-section" class="nav-link">Story</a>
-      <a href="#ratings-section" class="nav-link">Reviews</a>
-      <a href="#faq-section" class="nav-link">FAQs</a>
-      <a href="#location-section" class="nav-link">Locations</a>
-      <a href="#contact-section" class="nav-link">Contact</a>
+    <div class="nav-container">
+      <img src="logo.png" alt="Sip N Chill" class="nav-logo">
+      <div class="nav-links" id="navLinks">
+        <a href="#machines-section" class="nav-link">Machines</a>
+        <a href="#story-section" class="nav-link">Story</a>
+        <a href="#ratings-section" class="nav-link">Reviews</a>
+        <a href="#faq-section" class="nav-link">FAQs</a>
+        <a href="#location-section" class="nav-link">Locations</a>
+        <a href="#contact-section" class="nav-link">Contact</a>
+      </div>
+      <button class="mobile-menu-toggle" id="mobileMenuToggle">
+        <i class="fas fa-bars"></i>
+      </button>
     </div>
-    <button class="mobile-menu-toggle" id="mobileMenuToggle">
-      <i class="fas fa-bars"></i>
-    </button>
   </nav>
   
   <div class="theme-toggle" id="themeToggle">
@@ -1048,7 +1050,7 @@
       </div>
       <div class="machines">
         <div class="machine-card">
-          <img src="https://images.unsplash.com/photo-1577902411267-d1fcff2702e9" alt="Gym Vending Machine">
+          <img type="image/png" href="gym vending machine.png" alt="Gym Vending Machine">
           <h3>Gym Vending</h3>
           <p>Fuel your hustle. From protein bars to hydration, our gym vending solutions are tailored for active lifestyles with a premium edge.</p>
         </div>
@@ -1531,5 +1533,4 @@
     });
   </script>
 </body>
-
 </html>
