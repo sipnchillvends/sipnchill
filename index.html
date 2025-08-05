@@ -1,138 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sip N Chill - Grab. Sip. Chill.</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sip N Chill - Customer Reviews</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Open+Sans&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
+      font-family: 'Open Sans', sans-serif;
       background-color: #000;
       color: #fff;
+      padding: 30px;
     }
 
-    header {
-      padding: 2rem;
+    h1, h2 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 600;
       text-align: center;
-      background-color: #111;
     }
 
-    header h1 {
-      font-size: 3rem;
-      margin-bottom: 0.5rem;
-    }
-
-    header p {
-      font-size: 1.2rem;
-      color: #ccc;
-    }
-
-    section {
-      padding: 3rem 2rem;
+    .container {
       max-width: 1000px;
       margin: auto;
     }
 
-    .brand-story {
-      margin-bottom: 3rem;
-    }
-
-    .rating-section {
-      margin-bottom: 3rem;
-      text-align: center;
-    }
-
     .stars {
-      font-size: 2rem;
+      display: inline-flex;
+      gap: 5px;
+      animation: glow 2s ease-in-out infinite;
+    }
+
+    .star {
       color: gold;
-      display: inline-block;
-      animation: sparkle 1s infinite alternate;
+      font-size: 1.5rem;
     }
 
-    @keyframes sparkle {
-      from {
-        opacity: 0.8;
-        transform: scale(1);
-      }
-      to {
-        opacity: 1;
-        transform: scale(1.05);
-      }
+    @keyframes glow {
+      0% { text-shadow: 0 0 5px gold; }
+      50% { text-shadow: 0 0 20px gold; }
+      100% { text-shadow: 0 0 5px gold; }
     }
 
-    .reviews {
-      background-color: #111;
-      border-radius: 10px;
-      padding: 2rem;
+    .average-rating {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 1.3rem;
+      color: #ddd;
     }
 
     .testimonial {
-      border-bottom: 1px solid #333;
-      padding: 1rem 0;
+      background: #111;
+      padding: 25px;
+      border-radius: 10px;
+      margin-bottom: 25px;
+      border: 1px solid #333;
     }
 
-    .testimonial:last-child {
-      border-bottom: none;
+    .testimonial h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      margin-bottom: 10px;
     }
 
     .testimonial p {
-      margin: 0.5rem 0;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #ccc;
     }
 
-    .testimonial .name {
-      color: #aaa;
+    .review-form {
+      margin-top: 50px;
+      background: #111;
+      padding: 25px;
+      border-radius: 10px;
+      border: 1px solid #333;
+    }
+
+    .review-form input,
+    .review-form textarea,
+    .review-form select {
+      width: 100%;
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      background: #222;
+      color: #fff;
+    }
+
+    .review-form button {
+      background: #fff;
+      color: #000;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .review-form button:hover {
+      background: gold;
+      color: #000;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 50px;
       font-size: 0.9rem;
+      color: #666;
     }
   </style>
 </head>
-
 <body>
-  <header>
+  <div class="container">
     <h1>Sip N Chill</h1>
-    <p>Grab. Sip. Chill.</p>
-  </header>
+    <div class="average-rating">
+      Average Customer Rating:
+      <div class="stars">
+        <span class="star">★</span>
+        <span class="star">★</span>
+        <span class="star">★</span>
+        <span class="star">★</span>
+        <span class="star">☆</span>
+      </div>
+      <p>4.6 out of 5 (based on 100+ reviews)</p>
+    </div>
 
-  <section class="brand-story">
-    <h2>Our Story</h2>
-    <p>Sip N Chill™ – The Story In a world that never stops moving, we started with a simple question: “What if the best moments of life came in a bottle?” Sip N Chill was born not in a boardroom, but on the streets
-      where people hustle, sweat, study, build dreams, and chase time. We saw them students pulling all-nighters, athletes pushing their limits, couples sharing stolen moments,
-      workers catching a break under the sun. They all craved one thing: A moment to pause. A moment to grab, sip, and chill. That’s when the idea sparked to create a brand that didn’t just sell drinks... 
-      But served moments of refreshment in the chaos of life. From energy to calm, from classic Coke to bold Red Bull, from creamy protein to dreamy desserts Sip N Chill is your pocket-sized reset button. 
-      Every vending machine we place, every drink we stock – it’s all about you and your moment. We're not just a vending brand. We’re a movement. We’re the modern-day pause. The luxury of slowing down made accessible to all.
-      Our Mission: To make premium refreshment moments accessible, effortless, and unforgettable. Our Vision: To be the most loved micro-moment brand – where lifestyle meets convenience, and every sip feels like a reward.</p>
-  </section>
-
-  <section class="rating-section">
-    <h2>Customer Ratings</h2>
-    <div class="stars">★★★★★</div>
-    <p>Average Rating: 4.9/5</p>
-  </section>
-
-  <section class="reviews">
-    <h2>Customer Reviews</h2>
+    <h2>What People Are Saying</h2>
 
     <div class="testimonial">
-      <p>“Absolutely love the variety and taste! Super convenient and stylish.”</p>
-      <p class="name">– Arjun K.</p>
+      <h3>✨ Leena A. – Digital Nomad</h3>
+      <p>"I was blown away by the taste and chill factor of the drinks. It’s not just refreshment—it’s a vibe. Sip N Chill turned my stressful day into a peaceful one. Highly recommend for daily escapes."</p>
     </div>
 
     <div class="testimonial">
-      <p>“Best vending machine experience ever. The design alone is enough to make you stop and try!”</p>
-      <p class="name">– Riya M.</p>
+      <h3>🔥 Rajiv M. – Fitness Enthusiast</h3>
+      <p>"Perfect hydration after a workout. Stylish vending and top-tier flavors. It's luxury in a bottle, right from a vending machine. The vibe, the taste—unmatched."</p>
     </div>
 
     <div class="testimonial">
-      <p>“Finally a brand that knows what the youth wants. Quick, budget-friendly, and super chill.”</p>
-      <p class="name">– Dev S.</p>
+      <h3>🌟 Aanya K. – Entrepreneur</h3>
+      <p>"Sleek, premium, and refreshing. It feels like a 5-star hotel bar experience, but I got it in 30 seconds. Everyone I know wants to try it now."</p>
     </div>
 
-    <div class="testimonial">
-      <p>“The branding is 🔥 and the drinks taste even better. Love it!”</p>
-      <p class="name">– Sneha T.</p>
-    </div>
-  </section>
+    <h2>Leave a Review</h2>
+
+    <form class="review-form">
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <select required>
+        <option value="">Rating</option>
+        <option value="5">★★★★★ - Loved it!</option>
+        <option value="4">★★★★☆ - Pretty Good</option>
+        <option value="3">★★★☆☆ - It’s OK</option>
+        <option value="2">★★☆☆☆ - Not Great</option>
+        <option value="1">★☆☆☆☆ - Bad</option>
+      </select>
+      <textarea rows="4" placeholder="Write your experience..." required></textarea>
+      <button type="submit">Submit Review</button>
+    </form>
+
+    <footer>
+      &copy; 2025 Sip N Chill. All rights reserved. | Grab. Sip. Chill.
+    </footer>
+  </div>
 </body>
-
 </html>
