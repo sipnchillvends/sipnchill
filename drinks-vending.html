@@ -51,6 +51,34 @@
       padding: 0 40px;
     }
 
+    .back-button {
+  position: fixed;
+  top: 30px;
+  left: 30px;
+  background: var(--primary);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 30px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 1000;
+  transition: var(--transition);
+  box-shadow: 0 5px 15px rgba(0, 200, 200, 0.3);
+}
+
+.back-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 200, 200, 0.4);
+  background: var(--accent);
+}
+
+/* Adjust machine-details padding to account for fixed back button */
+.machine-details {
+  padding: 150px 0 120px; /* Increased top padding */
+}
+    
     /* Machine Details Page Styles */
     .machine-details {
       padding: 120px 0;
