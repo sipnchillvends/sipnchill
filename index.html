@@ -1019,12 +1019,140 @@
       .luxury-nav {
         padding: 15px 0;
       }
+      /* Login System Styles */
+.login-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 2000;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-container {
+  background-color: var(--card-bg);
+  padding: 40px;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 400px;
+  position: relative;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.close-login {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  color: var(--text);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.login-signup {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.login-signup a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 15px;
+  margin-left: 30px;
+}
+
+.login-button, 
+.signup-button,
+.logout-button {
+  padding: 8px 20px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.login-button {
+  background: transparent;
+  border: 1px solid var(--primary);
+  color: var(--primary);
+}
+
+.signup-button {
+  background: linear-gradient(45deg, var(--primary), var(--accent));
+  color: white;
+}
+
+.logout-button {
+  background: var(--accent);
+  color: white;
+  margin-left: 15px;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  margin-left: 30px;
+}
+
+.user-profile span {
+  color: var(--primary);
+  font-weight: 600;
+}
     }
   </style>
 </head>
 
 <body>
+  
   <div class="floating-elements" id="floatingElements"></div>
+
+  <!-- Login Modal -->
+<div class="login-modal" id="loginModal">
+  <div class="login-container">
+    <button class="close-login" id="closeLogin">&times;</button>
+    <h2>Login to Post a Review</h2>
+    <form id="loginForm">
+      <div class="form-group">
+        <input type="email" id="loginEmail" placeholder="Email" required>
+      </div>
+      <div class="form-group">
+        <input type="password" id="loginPassword" placeholder="Password" required>
+      </div>
+      <button type="submit" class="submit-button">Login</button>
+    </form>
+    <p class="login-signup">Don't have an account? <a href="#" id="showSignup">Sign up</a></p>
+  </div>
+</div>
+
+<!-- Signup Modal -->
+<div class="login-modal" id="signupModal">
+  <div class="login-container">
+    <button class="close-login" id="closeSignup">&times;</button>
+    <h2>Create an Account</h2>
+    <form id="signupForm">
+      <div class="form-group">
+        <input type="text" id="signupName" placeholder="Full Name" required>
+      </div>
+      <div class="form-group">
+        <input type="email" id="signupEmail" placeholder="Email" required>
+      </div>
+      <div class="form-group">
+        <input type="password" id="signupPassword" placeholder="Password" required>
+      </div>
+      <button type="submit" class="submit-button">Sign Up</button>
+    </form>
+    <p class="login-signup">Already have an account? <a href="#" id="showLogin">Login</a></p>
+  </div>
+</div>
   
   <!-- Luxury Navigation Bar - Centered -->
  <nav class="luxury-nav" id="luxuryNav">
@@ -1039,6 +1167,14 @@
       <a href="#faq-section" class="nav-link">FAQs</a>
       <a href="#location-section" class="nav-link">Locations</a>
       <a href="#contact-section" class="nav-link">Contact</a>
+      <div class="auth-buttons" id="authButtons">
+        <button class="login-button" id="navLogin">Login</button>
+        <button class="signup-button" id="navSignup">Sign Up</button>
+      </div>
+      <div class="user-profile" id="userProfile" style="display:none;">
+        <span id="userName"></span>
+        <button class="logout-button" id="navLogout">Logout</button>
+      </div>
     </div>
     <button class="mobile-menu-toggle" id="mobileMenuToggle">
       <i class="fas fa-bars"></i>
@@ -1104,19 +1240,25 @@
       </div>
       <div class="ratings-container">
         <div class="add-rating">
-          <div class="rating-form">
-            <h3>Share Your Experience</h3>
-            <div class="rating-stars" id="ratingStars">
-              <span class="star" data-value="1"><i class="fas fa-star"></i></span>
-              <span class="star" data-value="2"><i class="fas fa-star"></i></span>
-              <span class="star" data-value="3"><i class="fas fa-star"></i></span>
-              <span class="star" data-value="4"><i class="fas fa-star"></i></span>
-              <span class="star" data-value="5"><i class="fas fa-star"></i></span>
-            </div>
-            <textarea id="ratingMessage" placeholder="Tell us about your experience..."></textarea>
-            <button class="submit-rating" id="submitRating">Submit Rating</button>
-          </div>
-        </div>
+  <div class="rating-form">
+    <h3>Share Your Experience</h3>
+    <div id="ratingLoginPrompt" style="display:none;">
+      <p>Please login to post a review.</p>
+      <button class="submit-button" id="loginToReview">Login</button>
+    </div>
+    <div id="ratingFormContent">
+      <div class="rating-stars" id="ratingStars">
+        <span class="star" data-value="1"><i class="fas fa-star"></i></span>
+        <span class="star" data-value="2"><i class="fas fa-star"></i></span>
+        <span class="star" data-value="3"><i class="fas fa-star"></i></span>
+        <span class="star" data-value="4"><i class="fas fa-star"></i></span>
+        <span class="star" data-value="5"><i class="fas fa-star"></i></span>
+      </div>
+      <textarea id="ratingMessage" placeholder="Tell us about your experience..."></textarea>
+      <button class="submit-rating" id="submitRating">Submit Rating</button>
+    </div>
+  </div>
+</div>
         <div class="existing-ratings">
           <h3>Customer Reviews</h3>
           <div class="ratings-list" id="ratingsList">
@@ -1522,6 +1664,136 @@
           top: targetElement.offsetTop - 100,
           behavior: 'smooth'
         });
+        
+    // Login System
+const loginModal = document.getElementById('loginModal');
+const signupModal = document.getElementById('signupModal');
+const navLogin = document.getElementById('navLogin');
+const navSignup = document.getElementById('navSignup');
+const navLogout = document.getElementById('navLogout');
+const closeLogin = document.getElementById('closeLogin');
+const closeSignup = document.getElementById('closeSignup');
+const showSignup = document.getElementById('showSignup');
+const showLogin = document.getElementById('showLogin');
+const loginForm = document.getElementById('loginForm');
+const signupForm = document.getElementById('signupForm');
+const authButtons = document.getElementById('authButtons');
+const userProfile = document.getElementById('userProfile');
+const userName = document.getElementById('userName');
+const ratingLoginPrompt = document.getElementById('ratingLoginPrompt');
+const ratingFormContent = document.getElementById('ratingFormContent');
+const loginToReview = document.getElementById('loginToReview');
+
+// Check if user is logged in (in a real app, you'd check with your backend)
+let currentUser = JSON.parse(localStorage.getItem('currentUser')) || null;
+
+// Initialize UI based on login state
+function updateAuthUI() {
+  if (currentUser) {
+    authButtons.style.display = 'none';
+    userProfile.style.display = 'flex';
+    userName.textContent = currentUser.name;
+    if (ratingLoginPrompt) ratingLoginPrompt.style.display = 'none';
+    if (ratingFormContent) ratingFormContent.style.display = 'block';
+  } else {
+    authButtons.style.display = 'flex';
+    userProfile.style.display = 'none';
+    if (ratingLoginPrompt) ratingLoginPrompt.style.display = 'block';
+    if (ratingFormContent) ratingFormContent.style.display = 'none';
+  }
+}
+
+// Show login modal
+function showLoginModal() {
+  loginModal.style.display = 'flex';
+  signupModal.style.display = 'none';
+}
+
+// Show signup modal
+function showSignupModal() {
+  signupModal.style.display = 'flex';
+  loginModal.style.display = 'none';
+}
+
+// Close all modals
+function closeModals() {
+  loginModal.style.display = 'none';
+  signupModal.style.display = 'none';
+}
+
+// Event listeners
+navLogin.addEventListener('click', showLoginModal);
+navSignup.addEventListener('click', showSignupModal);
+closeLogin.addEventListener('click', closeModals);
+closeSignup.addEventListener('click', closeModals);
+showSignup.addEventListener('click', showSignupModal);
+showLogin.addEventListener('click', showLoginModal);
+
+if (loginToReview) {
+  loginToReview.addEventListener('click', showLoginModal);
+}
+
+// Login form submission
+loginForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const email = document.getElementById('loginEmail').value;
+  const password = document.getElementById('loginPassword').value;
+  
+  // In a real app, you would verify credentials with your backend
+  // This is just a demo using localStorage
+  const users = JSON.parse(localStorage.getItem('users')) || [];
+  const user = users.find(u => u.email === email && u.password === password);
+  
+  if (user) {
+    currentUser = user;
+    localStorage.setItem('currentUser', JSON.stringify(currentUser));
+    updateAuthUI();
+    closeModals();
+    alert('Login successful!');
+  } else {
+    alert('Invalid credentials');
+  }
+});
+
+// Signup form submission
+signupForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const name = document.getElementById('signupName').value;
+  const email = document.getElementById('signupEmail').value;
+  const password = document.getElementById('signupPassword').value;
+  
+  // In a real app, you would send this to your backend
+  const users = JSON.parse(localStorage.getItem('users')) || [];
+  
+  // Check if user already exists
+  if (users.some(u => u.email === email)) {
+    alert('Email already registered');
+    return;
+  }
+  
+  const newUser = { name, email, password };
+  users.push(newUser);
+  localStorage.setItem('users', JSON.stringify(users));
+  
+  // Log the user in
+  currentUser = newUser;
+  localStorage.setItem('currentUser', JSON.stringify(currentUser));
+  updateAuthUI();
+  closeModals();
+  alert('Account created successfully!');
+});
+
+// Logout
+navLogout.addEventListener('click', () => {
+  currentUser = null;
+  localStorage.removeItem('currentUser');
+  updateAuthUI();
+  alert('Logged out successfully');
+});
+
+// Initialize on page load
+updateAuthUI();
+         });
       });
     });
 </script>
