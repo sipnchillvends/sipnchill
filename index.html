@@ -1027,22 +1027,24 @@
   <div class="floating-elements" id="floatingElements"></div>
   
   <!-- Luxury Navigation Bar - Centered -->
-  <nav class="luxury-nav" id="luxuryNav">
-    <div class="nav-container">
+ <nav class="luxury-nav" id="luxuryNav">
+  <div class="nav-container">
+    <a href="#" class="logo-link">
       <img src="logo.png" alt="Sip N Chill" class="nav-logo">
-      <div class="nav-links" id="navLinks">
-        <a href="#machines-section" class="nav-link">Machines</a>
-        <a href="#story-section" class="nav-link">Story</a>
-        <a href="#ratings-section" class="nav-link">Reviews</a>
-        <a href="#faq-section" class="nav-link">FAQs</a>
-        <a href="#location-section" class="nav-link">Locations</a>
-        <a href="#contact-section" class="nav-link">Contact</a>
-      </div>
-      <button class="mobile-menu-toggle" id="mobileMenuToggle">
-        <i class="fas fa-bars"></i>
-      </button>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="#machines-section" class="nav-link">Machines</a>
+      <a href="#story-section" class="nav-link">Story</a>
+      <a href="#ratings-section" class="nav-link">Reviews</a>
+      <a href="#faq-section" class="nav-link">FAQs</a>
+      <a href="#location-section" class="nav-link">Locations</a>
+      <a href="#contact-section" class="nav-link">Contact</a>
     </div>
-  </nav>
+    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+      <i class="fas fa-bars"></i>
+    </button>
+  </div>
+</nav>
   
   <header id="main-header">
     <img src="logo.png" alt="Sip N Chill logo">
@@ -1522,6 +1524,15 @@
         });
       });
     });
-  </script>
+ <!-- Smooth scroll to top when clicking logo -->
+<script>
+  document.querySelector('.logo-link').addEventListener('click', function (e) {
+    e.preventDefault();
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+</script>
 </body>
 </html>
